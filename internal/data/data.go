@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+
+	"github.com/codemicro/initGit/internal/input"
 )
 
 //go:generate python ../../scripts/loadGitignores.py ./datafiles/gitignores.json
@@ -25,6 +27,14 @@ type Template struct {
 	}
 }
 
+func GetVariableValues(t Template) map[string]string {
+	o := make(map[string]string)
+	for _, varDef := range t.Vars {
+		o[varDef.Key] = input.Prompt(varDef.Description + ": ")
+	}
+	return o
+}
+
 type Licence struct {
 	Spdx    string
 	Name    string
@@ -38,13 +48,14 @@ const (
 )
 
 var (
-	AvailableTemplates []Template
-	Gitignores         map[string]string
-	Licences           []Licence
+	Templates  []Template
+	Gitignores map[string]string
+	Licences   []Licence
 )
 
 func init() {
 
+	// Load all templates
 	list, err := AssetDir(templateDirName)
 	if err != nil {
 		panic(err)
@@ -55,14 +66,16 @@ func init() {
 		if err != nil {
 			panic(fmt.Errorf("data.init: (%s) %s", f, err.Error()))
 		}
-		AvailableTemplates = append(AvailableTemplates, tpl)
+		Templates = append(Templates, tpl)
 	}
 
+	// Load gitignore fragments and licences
 	LoadResource(gitignoresFile, &Gitignores)
 	LoadResource(licencesFile, &Licences)
 
 }
 
+// LoadResource loads a given filename from the in-memory data store and unmarshalls the JSON of it into a given thing
 func LoadResource(filename string, out interface{}) error {
 	fCont, err := Asset(filename)
 	if err != nil {
@@ -71,6 +84,8 @@ func LoadResource(filename string, out interface{}) error {
 	return json.Unmarshal(fCont, out)
 }
 
+// MakeFullGitignore selects gitignore fragments from the specified options and combines them into a single string
+// Option keys that cannot be found are silently ignored
 func MakeFullGitignore(opts []string) (string, error) {
 	var contents []string
 	for _, opt := range opts {
