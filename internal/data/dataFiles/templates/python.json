@@ -2,9 +2,12 @@
     "name": "Python (with Poetry)",
     "key": "py",
 
-    "vars": {
-        "projectName": "Project name"
-    },
+    "vars": [
+        {
+            "key": "projectName",
+            "description": "Project name"
+        }
+    ],
 
     "directories": [
         "{projectName}"

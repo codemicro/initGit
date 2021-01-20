@@ -2,10 +2,16 @@
     "name": "Golang (with Go modules)",
     "key": "go",
 
-    "vars": {
-        "projectName": "Project name",
-        "moduleName": "Name to be used with go mod init"
-    },
+    "vars": [
+        {
+            "key": "projectName",
+            "description": "Project name"
+        },
+        {
+            "key": "moduleName",
+            "description": "Name to be used with go mod init"
+        }
+    ],
 
     "directories": [
         "cmd/{projectName}",

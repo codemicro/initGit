@@ -13,7 +13,10 @@ type Template struct {
 	Name string
 	Key  string
 
-	Vars        map[string]string
+	Vars []struct {
+		Key         string
+		Description string
+	}
 	Directories []string
 	Files       map[string]string
 	Commands    []struct {
