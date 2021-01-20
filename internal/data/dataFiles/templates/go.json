@@ -17,7 +17,7 @@
         "cmd/{projectName}/main.go": "package main\n"
     },
     
-    "commmands": [
+    "commands": [
         {
             "command": "go mod init {moduleName}"
         }

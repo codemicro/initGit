@@ -14,7 +14,7 @@
         "{projectName}/__main__.py": ""
     },
 
-    "commmands": [
+    "commands": [
         {
             "command": "poetry init",
             "stdin": [
