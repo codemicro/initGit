@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-//go:generate python ../../scripts/loadGitignores.py ./datafiles/gitignore.json
+//go:generate python ../../scripts/loadGitignores.py ./datafiles/gitignores.json
 //go:generate go-bindata -pkg data -prefix "dataFiles/" ./dataFiles/...
 
 type Template struct {
@@ -23,15 +23,15 @@ type Template struct {
 }
 
 type Licence struct {
-	Spdx string
-	Name string
+	Spdx    string
+	Name    string
 	Content string
 }
 
 const (
 	templateDirName = "templates"
-	licencesFile = "licences.json"
-	gitignoresFile = "gitignores.json"
+	licencesFile    = "licences.json"
+	gitignoresFile  = "gitignores.json"
 )
 
 var (
@@ -66,4 +66,15 @@ func LoadResource(filename string, out interface{}) error {
 		return err
 	}
 	return json.Unmarshal(fCont, out)
+}
+
+func MakeFullGitignore(opts []string) (string, error) {
+	var contents []string
+	for _, opt := range opts {
+		cont, ok := Gitignores[strings.ToLower(opt)]
+		if ok {
+			contents = append(contents, cont)
+		}
+	}
+	return strings.Join(contents, "\n"), nil
 }
