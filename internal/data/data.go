@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+//go:generate python ../../scripts/loadGitignores.py ./datafiles/gitignore.json
 //go:generate go-bindata -pkg data -prefix "dataFiles/" ./dataFiles/...
 
 type Template struct {
@@ -21,30 +22,48 @@ type Template struct {
 	}
 }
 
-const templateDirName = "templates"
+type Licence struct {
+	Spdx string
+	Name string
+	Content string
+}
 
-var AvailableTemplates []*Template
+const (
+	templateDirName = "templates"
+	licencesFile = "licences.json"
+	gitignoresFile = "gitignores.json"
+)
+
+var (
+	AvailableTemplates []Template
+	Gitignores         map[string]string
+	Licences           []Licence
+)
 
 func init() {
+
 	list, err := AssetDir(templateDirName)
 	if err != nil {
 		panic(err)
 	}
 	for _, f := range list {
-		tpl, err := LoadTemplate(strings.Join([]string{templateDirName, f}, "/"))
+		var tpl Template
+		err := LoadResource(strings.Join([]string{templateDirName, f}, "/"), &tpl)
 		if err != nil {
 			panic(fmt.Errorf("data.init: (%s) %s", f, err.Error()))
 		}
 		AvailableTemplates = append(AvailableTemplates, tpl)
 	}
+
+	LoadResource(gitignoresFile, &Gitignores)
+	LoadResource(licencesFile, &Licences)
+
 }
 
-func LoadTemplate(templateName string) (*Template, error) {
-	fCont, err := Asset(templateName)
+func LoadResource(filename string, out interface{}) error {
+	fCont, err := Asset(filename)
 	if err != nil {
-		return nil, err
+		return err
 	}
-
-	loadedTemplate := new(Template)
-	return loadedTemplate, json.Unmarshal(fCont, loadedTemplate)
+	return json.Unmarshal(fCont, out)
 }
