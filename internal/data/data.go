@@ -27,7 +27,7 @@ type Template struct {
 	}
 }
 
-func GetVariableValues(t Template) map[string]string {
+func GetTemplateVariableValues(t Template) map[string]string {
 	o := make(map[string]string)
 	for _, varDef := range t.Vars {
 		o[varDef.Key] = input.Prompt(varDef.Description + ": ")
