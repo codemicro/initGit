@@ -34,7 +34,7 @@ func PromptMulti(prompt string) (items []string) {
 
 }
 
-func PromptSelect(prompt string, options []string) (selected int, chosenItem string) {
+func PromptSelect(prompt string, options []string, allowNone bool) (selected int, chosenItem string) {
 	fmt.Println(prompt)
 	for i, v := range options {
 		fmt.Printf("  %d: %s\n", i+1, v)
@@ -43,6 +43,11 @@ func PromptSelect(prompt string, options []string) (selected int, chosenItem str
 		fmt.Print("> ")
 		scanner.Scan()
 		userInput := scanner.Text()
+
+		if userInput == "" && allowNone {
+			return -1, ""
+		}
+
 		userSelected, err := strconv.Atoi(userInput)
 		if err != nil {
 			fmt.Println("Not an integer.")
