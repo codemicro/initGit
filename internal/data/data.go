@@ -86,7 +86,7 @@ func LoadResource(filename string, out interface{}) error {
 
 // MakeFullGitignore selects gitignore fragments from the specified options and combines them into a single string
 // Option keys that cannot be found are silently ignored
-func MakeFullGitignore(opts []string) (string, error) {
+func MakeFullGitignore(opts []string) string {
 	var contents []string
 	for _, opt := range opts {
 		cont, ok := Gitignores[strings.ToLower(opt)]
@@ -94,5 +94,5 @@ func MakeFullGitignore(opts []string) (string, error) {
 			contents = append(contents, cont)
 		}
 	}
-	return strings.Join(contents, "\n"), nil
+	return strings.Join(contents, "\n")
 }
