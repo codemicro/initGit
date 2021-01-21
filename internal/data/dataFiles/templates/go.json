@@ -5,11 +5,13 @@
     "vars": [
         {
             "key": "projectName",
-            "description": "Project name"
+            "description": "Project name",
+            "default": "{dirName}"
         },
         {
             "key": "moduleName",
-            "description": "Name to be used with go mod init"
+            "description": "Name to be used with go mod init",
+            "default": "{projectName}"
         }
     ],
 
@@ -20,7 +22,8 @@
     ],
 
     "files": {
-        "cmd/{projectName}/main.go": "package main\n"
+        "cmd/{projectName}/main.go": "package main\n",
+        ".github/README.md": "# {projectName}\n"
     },
     
     "commands": [

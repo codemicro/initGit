@@ -3,6 +3,7 @@ package data
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/codemicro/initGit/internal/substitutions"
 	"strings"
 
 	"github.com/codemicro/initGit/internal/input"
@@ -18,6 +19,7 @@ type Template struct {
 	Vars []struct {
 		Key         string
 		Description string
+		Default     string
 	}
 	Directories []string
 	Files       map[string]string
@@ -27,12 +29,25 @@ type Template struct {
 	}
 }
 
-func GetTemplateVariableValues(t Template) map[string]string {
-	o := make(map[string]string)
+func GetTemplateVariableValues(t Template, existingVals map[string]string) map[string]string {
 	for _, varDef := range t.Vars {
-		o[varDef.Key] = input.Prompt(varDef.Description + ": ")
+		prompt := varDef.Description
+
+		substitutedDefault := substitutions.SubVariables(varDef.Default, existingVals)
+
+		if varDef.Default != "" {
+			prompt += fmt.Sprintf(" [%s]", substitutedDefault)
+		}
+
+		inx := input.Prompt(prompt + ": ")
+
+		if inx == "" {
+			inx = substitutedDefault
+		}
+
+		existingVals[varDef.Key] = inx
 	}
-	return o
+	return existingVals
 }
 
 type Licence struct {
@@ -70,9 +85,14 @@ func init() {
 	}
 
 	// Load gitignore fragments and licences
-	LoadResource(gitignoresFile, &Gitignores)
-	LoadResource(licencesFile, &Licences)
-
+	err = LoadResource(gitignoresFile, &Gitignores)
+	if err != nil {
+		panic(err)
+	}
+	err = LoadResource(licencesFile, &Licences)
+	if err != nil {
+		panic(err)
+	}
 }
 
 // LoadResource loads a given filename from the in-memory data store and unmarshalls the JSON of it into a given thing
