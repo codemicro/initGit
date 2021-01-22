@@ -15,7 +15,7 @@ you may need to change the `go:generate` declaration in `internal/data/data.go` 
 Python installed on your system.
 
 ```
-go generate github.com/codemicro/initGit
+go generate github.com/codemicro/initGit/...
 go build github.com/codemicro/initGit/cmd/initGit
 ```
 
