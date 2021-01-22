@@ -1,0 +1,43 @@
+{
+    "name": "Python (with Poetry)",
+    "key": "py",
+
+    "vars": [
+        {
+            "key": "projectName",
+            "description": "Project name",
+            "default": "{dirName}"
+        },
+        {
+            "key": "version",
+            "description": "Project version",
+            "default": "0.0.0"
+        }
+    ],
+
+    "directories": [
+        "{projectName}"
+    ],
+
+    "files": {
+        "{projectName}/__main__.py": "",
+        ".github/README.md": "# {projectName}\n"
+    },
+
+    "commands": [
+        {
+            "command": "poetry init",
+            "stdin": [
+                "{projectName}",
+                "{version}",
+                "",
+                "",
+                "{spdxLicense}",
+                "",
+                "no",
+                "no",
+                "yes"
+            ]
+        }
+    ]
+}

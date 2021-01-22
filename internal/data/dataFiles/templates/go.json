@@ -1,0 +1,34 @@
+{
+    "name": "Golang (with Go modules)",
+    "key": "go",
+
+    "vars": [
+        {
+            "key": "projectName",
+            "description": "Project name",
+            "default": "{dirName}"
+        },
+        {
+            "key": "moduleName",
+            "description": "Name to be used with go mod init",
+            "default": "{projectName}"
+        }
+    ],
+
+    "directories": [
+        "cmd/{projectName}",
+        "internal",
+        "run"
+    ],
+
+    "files": {
+        "cmd/{projectName}/main.go": "package main\nfunc main() {}\n",
+        ".github/README.md": "# {projectName}\n"
+    },
+    
+    "commands": [
+        {
+            "command": "go mod init {moduleName}"
+        }
+    ]
+}

@@ -4,19 +4,22 @@
 
   * Adds a `LICENCE`
   * Adds a `.gitignore`
-  * Creates a `README.md`
+  * Creates a project layout using predefined templates
   * Runs `git init` and commits these things for you
   * Adds a remote (or doesn't) of your choosing
 
-### Build
+## Build
+
+Building from source requires a version of Python 3 to be installed. If you're building on anything other than Windows, 
+you may need to change the `go:generate` declaration in `internal/data/data.go` to point to the correct version of
+Python installed on your system.
 
 ```
-go get -u github.com/codemicro/initGit
-go build github.com/codemicro/initGit
+go generate github.com/codemicro/initGit/...
+go build github.com/codemicro/initGit/cmd/initGit
 ```
 
-You might want to stick the resultant binary on your `PATH`, too.
+## Included templates
 
-### TODO (eventually)
-
-* Interface with the GitHub API to create new repositories
+* [Golang with Go modules](https://github.com/codemicro/initGit/blob/master/internal/data/dataFiles/templates/go.json)
+* [Python with Poetry](https://github.com/codemicro/initGit/blob/master/internal/data/dataFiles/templates/python.json)
