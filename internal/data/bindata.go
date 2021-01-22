@@ -95,7 +95,7 @@ func gitignoresJson() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "gitignores.json", size: 317068, mode: os.FileMode(438), modTime: time.Unix(1611264532, 0)}
+	info := bindataFileInfo{name: "gitignores.json", size: 317068, mode: os.FileMode(438), modTime: time.Unix(1611309622, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
