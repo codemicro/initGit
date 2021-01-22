@@ -22,7 +22,7 @@
     ],
 
     "files": {
-        "cmd/{projectName}/main.go": "package main\n",
+        "cmd/{projectName}/main.go": "package main\nfunc main() {}\n",
         ".github/README.md": "# {projectName}\n"
     },
     
