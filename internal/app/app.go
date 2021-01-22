@@ -33,6 +33,7 @@ func Run() {
 	// --- Prompt for template ---
 	template := pickTemplate()
 	if template != nil {
+		fmt.Println()
 		createdFilenames = append(createdFilenames, executeTemplate(*template, filesToWrite, &directoriesToMake, spdx)...)
 	}
 	fmt.Println()

@@ -1,7 +1,6 @@
 package directoryTree
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -25,10 +24,7 @@ func (d *Difference) walkDir() ([]string, error) {
 				return err
 			}
 			if !info.IsDir() {
-				fmt.Println(path, "is not dir")
 				o = append(o, path)
-			} else {
-				fmt.Println(path, "is dir")
 			}
 			return nil
 		})
