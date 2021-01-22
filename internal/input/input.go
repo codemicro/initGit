@@ -25,7 +25,6 @@ func PromptMulti(prompt string) (items []string) {
 		inputted := scanner.Text()
 
 		if inputted == "" {
-			fmt.Println()
 			return
 		}
 
@@ -63,8 +62,6 @@ func PromptSelect(prompt string, options []string, allowNone bool) (selected int
 
 		selected = userSelected
 		chosenItem = options[userSelected]
-
-		fmt.Println()
 
 		return
 	}
