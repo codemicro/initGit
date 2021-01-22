@@ -26,13 +26,16 @@ func Run() {
 
 	// --- Get licence to use ---
 	spdx := getLicense(filesToWrite)
+	fmt.Println()
 	// --- Make .gitignore ---
 	getGitignore(filesToWrite)
+	fmt.Println()
 	// --- Prompt for template ---
 	template := pickTemplate()
 	if template != nil {
 		createdFilenames = append(createdFilenames, executeTemplate(*template, filesToWrite, &directoriesToMake, spdx)...)
 	}
+	fmt.Println()
 	// --- Check if there's already a .git directory ---
 	var gitDirAlreadyExists bool
 	if _, err := os.Stat(".git"); err != nil {
@@ -47,8 +50,10 @@ func Run() {
 	} else {
 		fmt.Println(".git directory already found. git init will not be run.")
 	}
+	fmt.Println()
 	// --- Create new files ---
 	createdFilenames = append(createdFilenames, createDiskObjects(filesToWrite, directoriesToMake)...)
+	fmt.Println()
 	// --- Commit ---
 	runGitTrackAndCommit(createdFilenames)
 }
@@ -73,7 +78,7 @@ func getLicense(filesToWrite map[string][]byte) string {
 		}
 
 		if strings.Contains(selectedLicence.Content, "{name}") {
-			fmt.Println("This licence requires the name(s) of the copyright holder(s).")
+			fmt.Println("\nThis licence requires the name(s) of the copyright holder(s).")
 			name := input.Prompt("Enter copyright holder name: ")
 			selectedLicence.Content = strings.ReplaceAll(selectedLicence.Content, "{name}", name)
 		}
@@ -171,7 +176,6 @@ func executeTemplate(template data.Template, filesToWrite map[string][]byte, dir
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println("hello", x)
 		filenames = append(filenames, x...)
 	}
 	return
