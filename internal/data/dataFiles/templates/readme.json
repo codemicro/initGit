@@ -1,0 +1,20 @@
+{
+    "name": "README only",
+    "key": "readme",
+
+    "vars": [
+        {
+            "key": "projectName",
+            "description": "Project name",
+            "default": "{dirName}"
+        }
+    ],
+
+    "directories": [],
+
+    "files": {
+        ".github/README.md": "# {projectName}\n"
+    },
+
+    "commands": []
+}
