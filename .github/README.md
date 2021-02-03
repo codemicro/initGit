@@ -1,5 +1,7 @@
 # initGit
 
+![ISC License](https://img.shields.io/github/license/codemicro/initGit) ![Lines of code](https://img.shields.io/tokei/lines/github/codemicro/initGit)
+
 `initGit` automates a few tiny things that I have to do every time I make a new repository.
 
   * Adds a `LICENCE`
@@ -43,12 +45,6 @@ Python installed on your system.
    ./initGit
    ```
 
-<!-- LICENSE -->
 ## License
 
-[![ISC License][license-shield]][license-url]
-
 Distributed under the ISC License. See `LICENSE` for more information.
-
-[license-shield]: https://img.shields.io/github/license/codemicro/initGit.svg?style=for-the-badge
-[license-url]: https://github.com/codemicro/initGit/blob/master/LICENSE
