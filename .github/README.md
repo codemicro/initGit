@@ -1,43 +1,4 @@
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/codemicro/initGit">
-    <img src="https://raw.githubusercontent.com/codemicro/initGit/master/.github/img.png" alt="Logo" height="200px">
-  </a>
-
-  <h3 align="center">initGit</h3>
-
-  <p align="center">
-    Streamline your repository creation process
-    <br />
-    <a href="https://github.com/codemicro/initGit/issues">Report bug</a>
-    ·
-    <a href="https://github.com/codemicro/initGit/issues">Request feature</a>
-  </p>
-</p>
-
-<h2 style="display: inline-block">Table of Contents</h2>
-<ol>
-  <li>
-    <a href="#about-the-project">About The Project</a>
-    <ul>
-      <li><a href="#built-with">Built With</a></li>
-    </ul>
-  </li>
-  <li>
-    <a href="#getting-started">Getting Started</a>
-    <ul>
-      <li><a href="#prerequisites">Prerequisites</a></li>
-      <li><a href="#installation">Installation</a></li>
-    </ul>
-  </li>
-  <li><a href="#usage">Usage</a></li>
-  <li><a href="#contributing">Contributing</a></li>
-  <li><a href="#license">License</a></li>
-</ol>
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
+# initGit
 
 `initGit` automates a few tiny things that I have to do every time I make a new repository.
 
@@ -54,15 +15,6 @@ initGit includes a few templates. A template defines files and directories to cr
 * [README only](https://github.com/codemicro/initGit/blob/master/internal/data/dataFiles/templates/readme.json)
 
 If you add your own template, feel free to submit a PR to have it included in the project.
-
-### Built With
-
-* [go-bindata](https://github.com/go-bindata/go-bindata/)
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
@@ -90,22 +42,6 @@ Python installed on your system.
    sudo chmod +x initGit
    ./initGit
    ```
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Run the `initGit` executable (no arguments required) and follow the instructions.
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Any contributions are greatly appreciated.
-
-1. Fork the project
-2. Create a Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to your branch and open a PR (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <!-- LICENSE -->
 ## License
