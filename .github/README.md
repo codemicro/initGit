@@ -99,7 +99,7 @@ Run the `initGit` executable (no arguments required) and follow the instructions
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Any contributions are greatly appreciated.
 
 1. Fork the project
 2. Create a Branch (`git checkout -b feature/AmazingFeature`)
