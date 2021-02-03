@@ -25,9 +25,8 @@ If you add your own template, feel free to submit a PR to have it included in th
 
 ### Installation
 
-Building from source requires a version of Python 3 to be installed. If you're building on anything other than Windows, 
-you may need to change the `go:generate` declaration in `internal/data/data.go` to point to the correct version of
-Python installed on your system.
+If you're building on anything other than Windows, you may need to change the `go:generate` declaration in `internal/data/data.go`
+to point to the correct version of Python installed on your system.
 
 1. Clone the repo
    ```sh
