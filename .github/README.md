@@ -115,4 +115,4 @@ Contributions are what make the open source community such an amazing place to b
 Distributed under the ISC License. See `LICENSE` for more information.
 
 [license-shield]: https://img.shields.io/github/license/codemicro/initGit.svg?style=for-the-badge
-[license-url]: https://github.com/codemicro/initGit/blob/master/LICENSE.txt
+[license-url]: https://github.com/codemicro/initGit/blob/master/LICENSE
