@@ -31,7 +31,7 @@ Python installed on your system.
    ```sh
    git clone https://github.com/codemicro/initGit.git
    ```
-2. Build the project
+2. Build
    ```sh
    cd initGit
    go generate github.com/codemicro/initGit/...
