@@ -46,4 +46,4 @@ to point to the correct version of Python installed on your system.
 
 ## License
 
-Distributed under the ISC License. See `LICENSE` for more information.
+Distributed under the MIT License. See `LICENCE` for more information.
