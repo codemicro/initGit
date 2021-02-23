@@ -1,6 +1,6 @@
 # initGit
 
-![ISC License](https://img.shields.io/github/license/codemicro/initGit) ![Lines of code](https://img.shields.io/tokei/lines/github/codemicro/initGit)
+![MIT License](https://img.shields.io/github/license/codemicro/initGit) ![Lines of code](https://img.shields.io/tokei/lines/github/codemicro/initGit)
 
 `initGit` automates a few tiny things that I have to do every time I make a new repository.
 
