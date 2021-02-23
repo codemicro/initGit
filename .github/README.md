@@ -10,6 +10,8 @@
   * Runs `git init` and commits these things for you
   * Adds a remote (or doesn't) of your choosing
 
+Alternatively, it'll do only a select of those options, if you so desire.
+
 initGit includes a few templates. A template defines files and directories to create and commands to run. The included ones can be used as examples, and are:
 
 * [Golang with Go modules](https://github.com/codemicro/initGit/blob/master/internal/data/dataFiles/templates/go.json)
