@@ -3,8 +3,6 @@ package app
 import (
 	"bytes"
 	"fmt"
-	"github.com/codemicro/initGit/internal/directoryTree"
-	"github.com/codemicro/initGit/internal/substitutions"
 	"io"
 	"io/ioutil"
 	"os"
@@ -14,29 +12,83 @@ import (
 	"strings"
 	"time"
 
+	"github.com/codemicro/initGit/internal/directoryTree"
+	"github.com/codemicro/initGit/internal/substitutions"
+
 	"github.com/codemicro/initGit/internal/data"
 	"github.com/codemicro/initGit/internal/input"
 )
 
+func isStringInSlice(needle string, haystack []string) bool {
+	for _, item := range haystack {
+		if strings.EqualFold(needle, item) {
+			return true
+		}
+	}
+	return false
+}
+
 func Run() {
+
+	cliArgs := os.Args[1:]
+
+	availableActions := []string{"licence", "gitignore", "template", "init", "commit", "all"}
+	actionsToDo := map[string]bool{}
+
+	if isStringInSlice("help", cliArgs) || isStringInSlice("h", cliArgs) {
+		fmt.Println("Available arguments:")
+		fmt.Println(strings.Join(availableActions, ", "))
+		return
+	}
+
+	{
+		var wasUpdated bool
+		doAll := isStringInSlice("all", cliArgs)
+		// run every selected action or all of them if none specified
+		for _, actionName := range availableActions {
+			if actionName == "all" {
+				continue
+			}
+			if doAll || isStringInSlice(actionName, cliArgs) {
+				wasUpdated = true
+				actionsToDo[actionName] = true
+			}
+		}
+
+		if !wasUpdated {
+			fmt.Println("No recognised arguments. Available arguments are:")
+			fmt.Println(strings.Join(availableActions, ", "))
+			return
+		}
+	}
 
 	filesToWrite := make(map[string][]byte)
 	var directoriesToMake []string
 	var createdFilenames []string
 
 	// --- Get licence to use ---
-	spdx := getLicense(filesToWrite)
-	fmt.Println()
-	// --- Make .gitignore ---
-	getGitignore(filesToWrite)
-	fmt.Println()
-	// --- Prompt for template ---
-	template := pickTemplate()
-	if template != nil {
+	var spdx string
+	if actionsToDo["licence"] {
+		spdx = getLicense(filesToWrite)
 		fmt.Println()
-		createdFilenames = append(createdFilenames, executeTemplate(*template, filesToWrite, &directoriesToMake, spdx)...)
 	}
-	fmt.Println()
+
+	// --- Make .gitignore ---
+	if actionsToDo["gitignore"] {
+		getGitignore(filesToWrite)
+		fmt.Println()
+	}
+
+	// --- Prompt for template ---
+	if actionsToDo["template"] {
+		template := pickTemplate()
+		if template != nil {
+			fmt.Println()
+			createdFilenames = append(createdFilenames, executeTemplate(*template, filesToWrite, &directoriesToMake, spdx)...)
+		}
+		fmt.Println()
+	}
+
 	// --- Check if there's already a .git directory ---
 	var gitDirAlreadyExists bool
 	if _, err := os.Stat(".git"); err != nil {
@@ -45,18 +97,25 @@ func Run() {
 			gitDirAlreadyExists = true
 		}
 	}
+
 	// --- Init repo ---
-	if !gitDirAlreadyExists {
-		runGitInit()
-	} else {
-		fmt.Println(".git directory already found. git init will not be run.")
+	if actionsToDo["init"] {
+		if !gitDirAlreadyExists {
+			runGitInit()
+		} else {
+			fmt.Println(".git directory already found. git init will not be run.")
+		}
 	}
 	fmt.Println()
+
 	// --- Create new files ---
 	createdFilenames = append(createdFilenames, createDiskObjects(filesToWrite, directoriesToMake)...)
 	fmt.Println()
+
 	// --- Commit ---
-	runGitTrackAndCommit(createdFilenames)
+	if actionsToDo["commit"] && (gitDirAlreadyExists || actionsToDo["init"]) {
+		runGitTrackAndCommit(createdFilenames)
+	}
 }
 
 func getLicense(filesToWrite map[string][]byte) string {
@@ -158,7 +217,6 @@ func executeTemplate(template data.Template, filesToWrite map[string][]byte, dir
 				_, _ = io.WriteString(wc, substitutions.SubVariables(strings.Join(command.Stdin, "\n"), variableVals))
 			}()
 		}
-
 
 		diff, err := directoryTree.NewDifference(currentWorkingDirectory)
 		if err != nil {
