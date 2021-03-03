@@ -22,7 +22,7 @@ If you add your own template, feel free to submit a PR to have it included in th
 
 ### Prerequisites
 
-* Go >= 1.15 (1.15 being the latest version tested on)
+* Go >= 1.15 (1.15 being the earliest version tested on)
 * Python 3 (for building)
 
 ### Installation
