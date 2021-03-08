@@ -1,6 +1,10 @@
 # initGit
 
-![MIT License](https://img.shields.io/github/license/codemicro/initGit) ![Lines of code](https://img.shields.io/tokei/lines/github/codemicro/initGit)
+*Streamline your repository creation process*
+
+![MIT License](https://img.shields.io/github/license/codemicro/initGit) ![Lines of code](https://img.shields.io/tokei/lines/github/codemicro/initGit) [![Go Report Card](https://goreportcard.com/badge/github.com/codemicro/initGit)](https://goreportcard.com/report/github.com/codemicro/initGit)
+
+----
 
 `initGit` automates a few tiny things that I have to do every time I make a new repository.
 
