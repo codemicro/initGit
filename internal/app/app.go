@@ -32,7 +32,7 @@ func Run() {
 
 	cliArgs := os.Args[1:]
 
-	availableActions := []string{"licence", "gitignore", "template", "init", "commit", "all"}
+	availableActions := []string{"license", "gitignore", "template", "init", "commit", "all"}
 	actionsToDo := map[string]bool{}
 
 	if isStringInSlice("help", cliArgs) || isStringInSlice("h", cliArgs) {
@@ -68,7 +68,7 @@ func Run() {
 
 	// --- Get licence to use ---
 	var spdx string
-	if actionsToDo["licence"] {
+	if actionsToDo["license"] {
 		spdx = getLicense(filesToWrite)
 		fmt.Println()
 	}
@@ -125,7 +125,7 @@ func getLicense(filesToWrite map[string][]byte) string {
 		licenceOptions = append(licenceOptions, fmt.Sprintf("%s (%s)", v.Name, v.Spdx))
 	}
 
-	selectedLicenceIndex, _ := input.PromptSelect("Select a licence (leave blank for none):", licenceOptions, true)
+	selectedLicenceIndex, _ := input.PromptSelect("Select a license (leave blank for none):", licenceOptions, true)
 
 	if selectedLicenceIndex != -1 {
 
@@ -138,14 +138,14 @@ func getLicense(filesToWrite map[string][]byte) string {
 		}
 
 		if strings.Contains(selectedLicence.Content, "{name}") {
-			fmt.Println("\nThis licence requires the name(s) of the copyright holder(s).")
+			fmt.Println("\nThis license requires the name(s) of the copyright holder(s).")
 			name := input.Prompt("Enter copyright holder name: ")
 			selectedLicence.Content = strings.ReplaceAll(selectedLicence.Content, "{name}", name)
 		}
 
-		filesToWrite["LICENCE"] = []byte(selectedLicence.Content)
+		filesToWrite["LICENSE"] = []byte(selectedLicence.Content)
 
-		fmt.Println("LICENCE generated")
+		fmt.Println("LICENSE generated")
 
 		return selectedLicence.Spdx
 	}
