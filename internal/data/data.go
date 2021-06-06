@@ -9,7 +9,7 @@ import (
 	"github.com/codemicro/initGit/internal/input"
 )
 
-//go:generate python ../../scripts/loadGitignores.py ./datafiles/gitignores.json
+//go:generate python3 ../../scripts/loadGitignores.py ./dataFiles/gitignores.json
 //go:generate go-bindata -pkg data -prefix "dataFiles/" ./dataFiles/...
 
 type Template struct {
