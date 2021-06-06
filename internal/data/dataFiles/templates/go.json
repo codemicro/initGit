@@ -1,5 +1,5 @@
 {
-    "name": "Golang (with Go modules)",
+    "name": "Golang (with Go modules, Magefile)",
     "key": "go",
 
     "vars": [
@@ -22,13 +22,14 @@
     ],
 
     "files": {
-        "cmd/{projectName}/main.go": "package main\nfunc main() {}\n",
-        ".github/README.md": "# {projectName}\n"
+        "cmd/{projectName}/main.go": "package main\n\nfunc main() {\n\t\n}\n",
+        ".github/README.md": "# {projectName}\n",
+        "magefile.go": "//+build mage\n\npackage main\n\nimport (\n\t\"github.com/magefile/mage/sh\"\n)\n\nfunc Build() error {\n\treturn sh.Run(\"go\", \"build\" \"./...\")\n}"
     },
     
     "commands": [
         {
             "command": "go mod init {moduleName}"
-        }
+        },
     ]
 }
