@@ -30,6 +30,6 @@
     "commands": [
         {
             "command": "go mod init {moduleName}"
-        },
+        }
     ]
 }
