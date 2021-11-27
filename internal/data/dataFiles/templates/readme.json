@@ -13,7 +13,7 @@
     "directories": [],
 
     "files": {
-        ".github/README.md": "# {projectName}\n"
+        "README.md": "# {projectName}\n"
     },
 
     "commands": []

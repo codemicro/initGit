@@ -21,7 +21,7 @@
 
     "files": {
         "{projectName}/__main__.py": "",
-        ".github/README.md": "# {projectName}\n"
+        "README.md": "# {projectName}\n"
     },
 
     "commands": [
